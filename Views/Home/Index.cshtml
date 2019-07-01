@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Item>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach (Item i in Model)
+{
+    <li>@i.Name @i.Description</li>
+}
