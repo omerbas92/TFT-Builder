@@ -9,7 +9,7 @@ using tftWEB.Models;
 namespace tftWEB.Migrations
 {
     [DbContext(typeof(TFTContext))]
-    [Migration("20190701213303_InitialCreate")]
+    [Migration("20190702173538_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,51 +23,51 @@ namespace tftWEB.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ClassId");
-
                     b.Property<string>("Description");
 
                     b.Property<int>("Gold");
 
                     b.Property<string>("IconUrl");
 
-                    b.Property<int?>("OriginId");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("OriginId");
 
                     b.ToTable("Champions");
                 });
 
             modelBuilder.Entity("tftWEB.Models.ChampionClass", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Count");
+                    b.Property<int?>("ChampionId");
+
+                    b.Property<int>("ClassId");
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("GeneralDescription");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ChampionId");
 
                     b.ToTable("ChampionClass");
                 });
 
             modelBuilder.Entity("tftWEB.Models.ChampionOrigin", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Count");
+                    b.Property<int?>("ChampionId");
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("GeneralDescription");
+                    b.Property<int>("OriginId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ChampionId");
 
                     b.ToTable("ChampionOrigin");
                 });
@@ -110,15 +110,18 @@ namespace tftWEB.Migrations
                     b.ToTable("ItemRelations");
                 });
 
-            modelBuilder.Entity("tftWEB.Models.Champion", b =>
+            modelBuilder.Entity("tftWEB.Models.ChampionClass", b =>
                 {
-                    b.HasOne("tftWEB.Models.ChampionClass", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
+                    b.HasOne("tftWEB.Models.Champion")
+                        .WithMany("Class")
+                        .HasForeignKey("ChampionId");
+                });
 
-                    b.HasOne("tftWEB.Models.ChampionOrigin", "Origin")
-                        .WithMany()
-                        .HasForeignKey("OriginId");
+            modelBuilder.Entity("tftWEB.Models.ChampionOrigin", b =>
+                {
+                    b.HasOne("tftWEB.Models.Champion")
+                        .WithMany("Origin")
+                        .HasForeignKey("ChampionId");
                 });
 
             modelBuilder.Entity("tftWEB.Models.ItemRelation", b =>

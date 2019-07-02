@@ -5,7 +5,6 @@ C:\Users\Omer\Desktop\tftWEB\bin\Debug\netcoreapp2.2\tftWEB.dll
 C:\Users\Omer\Desktop\tftWEB\bin\Debug\netcoreapp2.2\tftWEB.pdb
 C:\Users\Omer\Desktop\tftWEB\bin\Debug\netcoreapp2.2\tftWEB.Views.dll
 C:\Users\Omer\Desktop\tftWEB\bin\Debug\netcoreapp2.2\tftWEB.Views.pdb
-C:\Users\Omer\Desktop\tftWEB\obj\Debug\netcoreapp2.2\tftWEB.csprojAssemblyReference.cache
 C:\Users\Omer\Desktop\tftWEB\obj\Debug\netcoreapp2.2\tftWEB.csproj.CoreCompileInputs.cache
 C:\Users\Omer\Desktop\tftWEB\obj\Debug\netcoreapp2.2\tftWEB.RazorAssemblyInfo.cache
 C:\Users\Omer\Desktop\tftWEB\obj\Debug\netcoreapp2.2\tftWEB.RazorAssemblyInfo.cs

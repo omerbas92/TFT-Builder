@@ -20,20 +20,24 @@ namespace tftWEB.Models
     public class Champion
     {
         public int Id { get; set; }
-
+        public string Name { get; set; }
         public int Gold { get; set; }
         public string Description { get; set; }
         public string IconUrl { get; set; }
-        public ChampionOrigin Origin { get; set; }
-        public ChampionClass Class { get; set; }
+        public List<ChampionOrigin> Origin { get; set; }
+        public List<ChampionClass> Class { get; set; }
     }
 
     public class ChampionOrigin
     {
-        public Origins Id { get; set; }
-        public string GeneralDescription { get; set; }
-        public int Count { get; set; }
-        public string Description { get; set; }
+        public int Id { get; set; }
+        public Origins OriginId { get; set; }
+    }
+
+    public class ChampionClass
+    {
+        public int Id { get; set; }
+        public Classes ClassId { get; set; }
     }
 
     public enum Origins
@@ -53,14 +57,6 @@ namespace tftWEB.Models
         Yordle = 13,
     }
 
-    public class ChampionClass
-    {
-        public Classes Id { get; set; }
-        public string GeneralDescription { get; set; }
-        public int Count { get; set; }
-        public string Description { get; set; }
-    }
-
     public enum Classes
     {
         Assassin = 1,
@@ -74,6 +70,7 @@ namespace tftWEB.Models
         Shapeshifter = 9,
         Sorcerer = 10
     }
+
 
     public class Item
     {

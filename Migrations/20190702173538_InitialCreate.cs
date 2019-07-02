@@ -7,31 +7,19 @@ namespace tftWEB.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ChampionClass",
+                name: "Champions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
-                    GeneralDescription = table.Column<string>(nullable: true),
-                    Count = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    Gold = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    IconUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChampionClass", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ChampionOrigin",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    GeneralDescription = table.Column<string>(nullable: true),
-                    Count = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ChampionOrigin", x => x.Id);
+                    table.PrimaryKey("PK_Champions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,30 +38,43 @@ namespace tftWEB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Champions",
+                name: "ChampionClass",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Gold = table.Column<int>(nullable: false),
+                    ClassId = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    IconUrl = table.Column<string>(nullable: true),
-                    OriginId = table.Column<int>(nullable: true),
-                    ClassId = table.Column<int>(nullable: true)
+                    ChampionId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Champions", x => x.Id);
+                    table.PrimaryKey("PK_ChampionClass", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Champions_ChampionClass_ClassId",
-                        column: x => x.ClassId,
-                        principalTable: "ChampionClass",
+                        name: "FK_ChampionClass_Champions_ChampionId",
+                        column: x => x.ChampionId,
+                        principalTable: "Champions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChampionOrigin",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    OriginId = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    ChampionId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChampionOrigin", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Champions_ChampionOrigin_OriginId",
-                        column: x => x.OriginId,
-                        principalTable: "ChampionOrigin",
+                        name: "FK_ChampionOrigin_Champions_ChampionId",
+                        column: x => x.ChampionId,
+                        principalTable: "Champions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -112,14 +113,14 @@ namespace tftWEB.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Champions_ClassId",
-                table: "Champions",
-                column: "ClassId");
+                name: "IX_ChampionClass_ChampionId",
+                table: "ChampionClass",
+                column: "ChampionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Champions_OriginId",
-                table: "Champions",
-                column: "OriginId");
+                name: "IX_ChampionOrigin_ChampionId",
+                table: "ChampionOrigin",
+                column: "ChampionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemRelations_NextItemId",
@@ -140,16 +141,16 @@ namespace tftWEB.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Champions");
+                name: "ChampionClass");
+
+            migrationBuilder.DropTable(
+                name: "ChampionOrigin");
 
             migrationBuilder.DropTable(
                 name: "ItemRelations");
 
             migrationBuilder.DropTable(
-                name: "ChampionClass");
-
-            migrationBuilder.DropTable(
-                name: "ChampionOrigin");
+                name: "Champions");
 
             migrationBuilder.DropTable(
                 name: "Items");

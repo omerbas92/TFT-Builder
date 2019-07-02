@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Item>
+﻿@model IEnumerable<Champion>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-@foreach (Item i in Model)
+@*@foreach (Champion c in Model)
 {
-    <li>@i.Name @i.Description</li>
-}
+    <li>@c.Name, @c.Description, @c.Gold, @c.Origin.First().OriginId.ToString(), @c.Class.First().ClassId.ToString()</li>
+}*@
